@@ -10,7 +10,7 @@ platf=platform.architecture()[0]
 print('\nZdravstvuy, dorogoy drug!\n')
 
 # Установленная версия, строка информирования, метод установки, метод проверки
-userVersion, infoStr, installMethod, checkMethod=get_CurrentVersion()
+currentVersion, infoStr, installMethod, checkMethod=get_CurrentVersion()
 print(infoStr)
 
 #Блок условий для модифицирования ссылки загрузки
@@ -37,7 +37,7 @@ print('\nChecking the latest version of Google Chrome...')
 newVersion=get_NewVersion()
 
 # Проверка, требуется ли обновление
-if userVersion==newVersion:
+if currentVersion==newVersion:
     equalityVers=True
     print('Update is not required.\nYou already have the latest version of Google Chrome:', newVersion)
     print('Do you want to download and install this version?(y or n)')
