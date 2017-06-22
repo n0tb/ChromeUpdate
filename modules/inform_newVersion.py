@@ -23,8 +23,8 @@ def parse_page(html):
         return link
     
     # Если на первой странице не найдена ссылка с соответствующим заголовком,
-    # то вызовается рекурсивно функция parse_page(get_page(urlPreviousPage)),
-    # в каторую передаётся HTML код предыдущей страницы c постами
+    # то вызывается рекурсивно функция parse_page(get_page(urlPreviousPage)),
+    # в которую передаётся HTML код предыдущей страницы c постами
     else:
         tagPreviousPage=soup.find('a', 'blog-pager-older-link')
         if tagPreviousPage:
@@ -50,7 +50,7 @@ def get_NewVersion():
     textPage=soup.body.find('div', attrs={'itemprop':'articleBody'})
     if textPage:
         textPage=textPage.text
-        # поиск совподения текста при помощи регудярного выражения
+        # поиск совпадения текста при помощи регулярного выражения
         match=re.search(r'https://chromium\.googlesource\.com/chromium/src/\+log.{1,}?pretty=fuller&amp;n=1000', textPage)
     else:
         print('Eror:( Element "itemprop:articleBody" not found. The element may have changed.')

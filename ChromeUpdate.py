@@ -3,7 +3,7 @@ sys.path.insert(0, './modules')
 
 from inform_currentVersion import checkAllUsers, checkCurrUser, get_CurrentVersion
 from inform_newVersion import get_page, parse_page, get_NewVersion
-from get_Chrome import download_Chrome, install_Chrome
+from get_Chrome import download_Chrome, install_Chrome, remove_file
 
 
 platf=platform.architecture()[0]
@@ -55,7 +55,7 @@ while True:
 
         print('\nDownload...')
         download_Chrome(directLink)
-        print('Google Chrome has successfully downloaded')
+        print('Google Chrome %s successfully uploaded' % newVersion)
 
         print('\nInstall...')
         installStatus=install_Chrome(installMethod, newVersion, equalityVers)
@@ -75,10 +75,13 @@ while True:
         
         if installVersion==newVersion:
             print('Google Chrome %s successfully installed' % installVersion)
+            remove_file()
             break
         else:
             print('Sorry, something went wrong :(')
+            remove_file()
             sys.exit()
+        
 
     elif choice=='n':
         print('\nDownload Link:\n', '-'*50)

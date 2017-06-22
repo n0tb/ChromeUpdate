@@ -31,8 +31,8 @@ def install_Chrome(installMethod, newVersion, equalityVers):
         except:
             return False
 
-    # Если выполняется от имени администратора,
-    # или есть возможность установить в пронстранство текущего пользователя
+    # Если выполняется от имени администратора
+    # или есть возможность установить в пространство текущего пользователя
     if is_admin() or installMethod=='currentUser':
         proc=subprocess.Popen([r'ChromeStandaloneSetup.exe', ' /silent', ' /install'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         error=proc.communicate()[1]
@@ -42,8 +42,8 @@ def install_Chrome(installMethod, newVersion, equalityVers):
         else:
             return True
     
-    # Иначе, для установки, необходимо повысить привелегии, вызвав окно UAC.
-    # В противном случае, при установке вызовится ошибка
+    # Иначе, для установки необходимо повысить привилегии, вызвав окно UAC.
+    # В противном случае, произдёт ошибка при установке
     else:
         command=os.getcwd()+'\\ChromeStandaloneSetup.exe'
         param='/silent /install'
@@ -52,13 +52,13 @@ def install_Chrome(installMethod, newVersion, equalityVers):
         # Т.к. после запуска команды runas, скрипт продолжит выполнение,
         # необходимо предоставить врем на установку браузера.
         # Сложно выполнить проверку, когда версии были равны, 
-        # поэтому в этом случае функция установка, спустя 80c ожидания, всегда возвращает True 
+        # поэтому в этом случае функция установки, спустя 80c ожидания, всегда возвращает True 
         if equalityVers:
             time.sleep(80)
             return True
             
-        # Иначе, если версии изначально были не равны,
-        # то по истечению 50с проверяется значение ячейки версии в реестре
+        # Иначе, если версии изначально были неравны,
+        # то по истечению 50с проверяется значение ячейки Version в реестре
         else:
             time.sleep(50)
             installVersion=checkAllUsers() 
@@ -68,6 +68,11 @@ def install_Chrome(installMethod, newVersion, equalityVers):
             else:
                 return False
 
+def remove_file():
+    try:
+        os.remove(os.getcwd()+'\\ChromeStandaloneSetup.exe')
+    except:
+        pass
 
 if __name__=='__main__':
     link='https://dl.google.com/tag/s/appguid'\
